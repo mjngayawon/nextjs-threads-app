@@ -46,12 +46,15 @@ const ThreadCard = ({
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-4">
           <div className="flex flex-col items-center">
-            <Link href={`/profile/${author.id}`} className="relative h-11 w-11">
+            <Link
+              href={`/profile/${author.id}`}
+              className="relative h-11 w-11 rounded-full cursor-pointer overflow-hidden"
+            >
               <Image
                 src={author.image}
                 alt="Profile Image"
                 fill
-                className="cursor-pointer rounded-full"
+                className="object-cover"
               />
             </Link>
 
@@ -116,25 +119,26 @@ const ThreadCard = ({
 
         {/* Delete thread */}
         {/* Show Comment logos */}
-        {!isComment && community && (
-          <Link
-            href={`/communities/${community.id}`}
-            className="mt-5 flex items-center"
-          >
-            <p className="text-subtle-medium text-gray-1">
-              {formatDateString(createdAt)}- {community.name} Community
-            </p>
+      </div>
+      {!isComment && community && (
+        <Link
+          href={`/communities/${community.id}`}
+          className="mt-5 flex items-center"
+        >
+          <p className="text-subtle-medium text-gray-1">
+            {formatDateString(createdAt)} - {community.name} Community
+          </p>
 
+          <div className="relative ml-1 w-[14px] h-[14px] rounded-full overflow-hidden">
             <Image
               src={community.image}
               alt={community.name}
-              width={14}
-              height={14}
-              className="ml-1 rounded-full object-cover"
+              fill
+              className="object-cover"
             />
-          </Link>
-        )}
-      </div>
+          </div>
+        </Link>
+      )}
     </article>
   );
 };
