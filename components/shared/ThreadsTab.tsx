@@ -27,6 +27,7 @@ interface Result {
         image: string;
       };
     }[];
+    likes: string;
   }[];
 }
 
@@ -72,6 +73,7 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
           }
           createdAt={thread.createdAt}
           comments={thread.children}
+          hasLiked={thread.likes.includes(currentUserId)}
         />
       ))}
     </section>

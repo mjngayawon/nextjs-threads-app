@@ -2,6 +2,7 @@ import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import DeleteThread from "../forms/DeleteThread";
+import LikeThread from "../forms/LikeThread";
 
 interface Props {
   id: string;
@@ -25,6 +26,7 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  hasLiked?: boolean;
 }
 
 const ThreadCard = ({
@@ -37,6 +39,7 @@ const ThreadCard = ({
   createdAt,
   comments,
   isComment,
+  hasLiked,
 }: Props) => {
   return (
     <article
@@ -72,14 +75,11 @@ const ThreadCard = ({
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">
-                <Image
-                  src="/assets/heart-gray.svg"
-                  alt="heart"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain"
+                <LikeThread
+                  threadId={id.toString()}
+                  userId={currentUserId}
+                  hasLiked={hasLiked}
                 />
-
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"
@@ -89,7 +89,6 @@ const ThreadCard = ({
                     className="cursor-pointer object-contain"
                   />
                 </Link>
-
                 <Image
                   src="/assets/repost.svg"
                   alt="repost"
@@ -97,7 +96,6 @@ const ThreadCard = ({
                   height={24}
                   className="cursor-pointer object-contain"
                 />
-
                 <Image
                   src="/assets/share.svg"
                   alt="share"

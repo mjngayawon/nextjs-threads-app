@@ -31,6 +31,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           community={thread.community}
           createdAt={thread.createdAt}
           comments={thread.children}
+          hasLiked={thread.likes.includes(user?.id)}
         />
       </div>
 
@@ -54,6 +55,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             community={childItem.community}
             createdAt={childItem.createdAt}
             comments={childItem.children}
+            hasLiked={childItem.likes.includes(user?.id)}
             isComment
           />
         ))}
