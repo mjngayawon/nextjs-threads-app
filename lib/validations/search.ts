@@ -1,5 +1,5 @@
 import * as z from "zod";
 
-export const SearchUserValidation = z.object({
+export const SearchValidation = z.object({
   query: z.string().nonempty(),
 });

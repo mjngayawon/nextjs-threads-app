@@ -1,5 +1,5 @@
 import UserCard from "@/components/cards/UserCard";
-import SearchUser from "@/components/forms/SearchUser";
+import Search from "@/components/forms/Search";
 import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -31,7 +31,7 @@ async function Page({ searchParams }: Props) {
     <section>
       <h1 className="head-text mb-10">Search</h1>
 
-      <SearchUser />
+      <Search type="User" />
 
       <div className="mt-14 flex flex-col gap-9">
         {result.users.length === 0 ? (

@@ -6,24 +6,22 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Input } from "../ui/input";
-import { SearchUserValidation } from "@/lib/validations/search";
+import { SearchValidation } from "@/lib/validations/search";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
-function SearchUser() {
+function Search({ type }: { type: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("query") || "";
 
   const form = useForm({
-    resolver: zodResolver(SearchUserValidation),
+    resolver: zodResolver(SearchValidation),
     defaultValues: {
       query: initialQuery,
     },
@@ -34,7 +32,12 @@ function SearchUser() {
   useEffect(() => {
     const handler = setTimeout(() => {
       const encodedQuery = encodeURIComponent(formValue.trim());
-      router.replace(`/search?query=${encodedQuery}`);
+
+      if (type === "User") {
+        router.replace(`/search?query=${encodedQuery}`);
+      } else {
+        router.replace(`/communities?query=${encodedQuery}`);
+      }
     }, 500);
 
     return () => clearTimeout(handler);
@@ -67,4 +70,4 @@ function SearchUser() {
   );
 }
 
-export default SearchUser;
+export default Search;
