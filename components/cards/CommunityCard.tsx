@@ -48,6 +48,7 @@ function CommunityCard({ id, name, username, imgUrl, bio, members }: Props) {
           <div className="flex items-center">
             {members.map((member, index) => (
               <div
+                key={index}
                 className={`relative w-[28px] h-[28px] rounded-full overflow-hidden`}
               >
                 <Image
